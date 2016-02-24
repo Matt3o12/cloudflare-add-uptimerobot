@@ -38,13 +38,14 @@ def add_ip_to_cloudflare(ip, email, secret):
         raise APIError(msg.format(r.json().get("errors", [])))
 
 def ask_for_auth():
+    input_function = None
     try:
-        input = raw_input
+        input_function = raw_input
     except NameError:
-        pass
+        input_function = input
 
-    email = input("Email: ").strip()
-    secret = input("API-Secret: ").strip()
+    email = input_function("Email: ").strip()
+    secret = input_function("API-Secret: ").strip()
 
     return email, secret
 
